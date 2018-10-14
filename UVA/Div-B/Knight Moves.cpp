@@ -63,10 +63,6 @@ int bfs(int a1, int a2, int b1, int b2) {
 	return -1;
 }
 
-bool valid(string a) {
-	return a[0] > 96 && a[0] < 123 && a[1] - '0' > 0 && a[2] - '0' < 9;
-}
-
 int main() {
 	char a1, a2, b1, b2;
 	int move = 0;
