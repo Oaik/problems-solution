@@ -26,7 +26,7 @@ int dp[N][29][29];
 int solve(int i, int l = 0, int r = 0) {
 	if (l > k || r > k)
 		return 1e9;
-	if ( i > (n/2) || l+r > n/2)
+	if ( i >= n-1-i+r-l)
 		return 0;
 
 	int& ret = dp[i][l][r];
