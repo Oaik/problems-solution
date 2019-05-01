@@ -14,26 +14,21 @@ void debug() {
 double const EPS = 1e-9, PI = acos(-1);
 int const N = 2e5 + 9, OO = 1e9;
 
-vector<int> vec;
-
 int main() {
   debug();
-  int n, m, a, total, g;
-  while (cin >> n >> m, n || m) {
-    vec.clear();
-    for (int i = 0; i < n; ++i) {
-      for (int j = 0; j < m; ++j) {
-        cin >> a;
-      }
-      vec.push_back(a);
+  int t, n, k;
+  double p;
+  cin >> t;
+  while(t--) {
+    cin >> n >> p >> k;
+    ll i = 0;
+    double ans = 0, temp = OO;
+    while(fabs(ans - temp) > EPS) {
+      temp = ans;
+      ans += p*(pow(1-p, n*i + k - 1));
+      ++i;
     }
-    total = 0;
-    for(int ii: vec)
-      total += ii;
-    for(int ii: vec) {
-      g = __gcd(total, ii);
-      cout << ii / g << " / " << total / g << '\n';
-    }
+    cout << ans << endl;
   }
 }
 
