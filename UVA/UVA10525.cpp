@@ -54,7 +54,7 @@ int main() {
       while(!q.empty()) {
         edge e = q.top();
         q.pop();
-        if(e.time > time[e.to]) // (or dist == dist && time > time
+        if(e.time > time[e.to]) // (or time == time && dist > dist
           continue;
         for(auto ee: vec[e.to]) {
           if((time[ee.to] > time[ee.from] + ee.time) || (time[ee.to] == time[ee.from] + ee.time && dist[ee.to] > dist[ee.from] + ee.dist)) {
