@@ -2,85 +2,73 @@
 
 using namespace std;
 #define ll long long
-#define all(v)  	((v).begin()),((v).end())
-#define sz(x)  		((ll) (x).size())
-#define clr(a,b)	memset(a,b,sizeof(a))
-const double EPS = 1e-8;
-const double pi = acos(-1);
-ll dcmp(double a, double b) {
-	return fabs(a - b) <= EPS ? 0 : a < b ? -1 : 1;
-}
-void debug() {
-#ifndef ONLINE_JUDGE
-	freopen("input.in", "rt", stdin);
-//	freopen("output.in", "wt", stdout);
-#endif
-}
 
-int const N = 2e5 + 9, M = 100 + 9, OO = 1e9;
+struct edge {
+	int from, to, w;
+	edge(int from, int to, int w) : from(from), to(to), w(w) {}
+	bool operator <(const edge &e) const {
+		return e.w < w;
+	}
+};
 
-vector<pair<int, pair<int, int>>> vec;
+int t, n, m, a, b, c;
 
-bool del[5000];
-int par[1001], sz[1001];
+vector<edge> schools;
+int par[5000];
+bool visited[5000][5000] = {0};
 
 int find(int x) {
-	if (x == par[x])
-		return x;
+	if(x == par[x]) return x;
 	return par[x] = find(par[x]);
 }
 
-bool join(int x, int y) {
-	x = find(x), y = find(y);
-	if (x == y)
-		return false;
-	par[x] = y;
-	return true;
+pair<ll, vector<edge>> kruskal(int n) {
+	ll minCost = 0;
+	priority_queue<edge> q;
+	vector<edge> ans;
+	for (int i = 1; i <= n; ++i)
+		par[i] = i;
+	for (int i = 0; i < m; ++i){
+		if(!visited[schools[i].from][schools[i].to])
+			q.push(schools[i]);
+	}
+	while(!q.empty()) {
+		edge e = q.top();q.pop();
+		a = find(e.from), b = find(e.to);
+		if (a != b) {
+			ans.push_back(e);
+			par[a] = b, --n, minCost += e.w;
+			if(n == 1) return {minCost, ans};
+		}
+	}
+	return {INT_MAX, ans};
 }
 
+
 int main() {
-	cout << fixed << setprecision(0);
-	ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
-	debug();
-	int t, n, m, u, v, c, sz, o = 0;
-	ll sum = 0, sum2 = 0, cnt = 0;
+//	freopen("input.in", "r", stdin);
+//	freopen("output.in", "w", stdout);
 	cin >> t;
-	while (t--) {
-		o = 0;
-		vec.clear();
+	while(t--) {
 		cin >> n >> m;
-		clr(del, 0);
-		iota(par, par + n + 1, 0);
-		sum = 0, sum2 = 1e9, cnt = 0;
-//		clr(sz, 0);
+		schools = vector<edge>();
 		for (int i = 0; i < m; ++i) {
-			cin >> u >> v >> c;
-			vec.push_back( { c, { u, v } });
+			cin >> a >> b >> c;
+			schools.push_back(edge(a, b, c));
+//			cin >> schools[i].from >> schools[i].to >> schools[i].w;
 		}
-		sort(vec.begin(), vec.end());
-		sz = sz(vec);
-		for (int i = 0; i < sz; ++i) {
-			if (join(vec[i].second.first, vec[i].second.second)) {
-				sum += vec[i].first;
-				del[i] = 1;
-			}
+		ll secMin = INT_MAX;
+		pair<int, vector<edge>> ans;
+		ans = kruskal(n);
+		cout << ans.first << " ";
+		for (int i = 0; i < (int)ans.second.size(); ++i) {
+			visited[ans.second[i].from][ans.second[i].to] = 1;
+			secMin = min(kruskal(n).first, secMin);
+			visited[ans.second[i].from][ans.second[i].to] = 0;
 		}
-		for (int j = 0; j < sz; ++j) {
-			if(!del[j]) continue;
-			iota(par, par + n + 1, 0);
-			o = 0;
-			for (int i = 0; i < sz; ++i) {
-				if ( i != j && join(vec[i].second.first, vec[i].second.second)) {
-					cnt += vec[i].first;
-					++o;
-				}
-			}
-			if(o == n - 1) {
-				sum2 = min(sum2, cnt);
-			}
-			cnt = 0;
-		}
-		cout << sum << " " << sum2 << endl;
+		cout << secMin;
+		cout << "\n";
 	}
+	return 0;
 }
 
