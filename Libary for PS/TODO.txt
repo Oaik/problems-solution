@@ -1,0 +1,21 @@
+##Graph
+DIJKSTRA
+FLOYAD
+BELLMAN
+SSC(tarjan, Kosaraju)
+2-Sat
+##Strings
+Trie
+##Searching
+Meet in the middle
+Binary search tricks
+Ternay Search
+
+Recap: 
+Expected Value and ( DP on expected value Mostafa saad channel)
+Geometry rules
+Arthmetic and geometric sequence rules (**To inifity**)
+
+TODO after ECPC (if I fit before ACPC):
+Li chao tree Data structure https://www.youtube.com/watch?v=-StmrE2gY44
+https://usaco.guide/adv/
