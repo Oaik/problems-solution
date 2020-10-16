@@ -8,8 +8,8 @@ for (int j = 0; j < k; ++j) {
 }
 
 for (int q = 1; q < LOG; ++q) {
-	for (int j = 0; + (1 << q) <= n; ++j) {
-		sparse[j][q] = max(sparse[j][q - 1], sparse[j + (1 << (q-1))][q - 1]);
+	for (int j = 0; j + (1 << q) <= n; ++j) {
+		sparse[j][q] = min(sparse[j][q - 1], sparse[j + (1 << (q-1))][q - 1]);
 	}
 }
 

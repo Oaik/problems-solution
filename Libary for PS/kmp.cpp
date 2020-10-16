@@ -19,7 +19,6 @@ void kmp(string text, string pat) {
     if(text[i] == pat[k])
       ++k;
     if(k == m){
-      cout << i - m + 1 << '\n';
       k = preTable[k-1];
     }
   }

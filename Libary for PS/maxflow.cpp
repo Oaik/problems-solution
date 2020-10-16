@@ -39,3 +39,4 @@ cout << flow << '\n';
 
 // 			addBiEdge(out[i], i); for node values
 // out[i] to in[j] // General formula
+// vetrix to edge trick

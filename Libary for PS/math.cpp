@@ -24,7 +24,6 @@ int fastpow(int x, int pow) {
 	return ret;
 }
 
-// Mod Inverse and NCR % Prime
 int modInv(int x) {
 	return fastpow(x, MOD - 2);
 }

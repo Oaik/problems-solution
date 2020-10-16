@@ -22,7 +22,7 @@ void propagate(int node, int start, int end) {
 }
 
 ll query(int node, int start, int end, int l, int r) {
-	propagate(node, start, end);
+//	propagate(node, start, end);
 	if(start > r || end < l)
 		return 0;
 	if(start >= l && end <= r) {
@@ -46,5 +46,19 @@ void update(int node, int start, int end, int l, int r, int val) {
 	int mid = (start + end) / 2;
 	update(node * 2, start, mid, l, r, val);
 	update(node * 2 + 1, mid + 1, end, l, r, val);
+	tree[node] = tree[node * 2] + tree[node * 2 + 1];
+}
+
+void update(int node, int start, int end, int idx, int val) {
+	if(start == end) {
+		tree[node] = val;		
+		return;
+	}
+	int mid = (start + end) / 2;
+	if(idx <= mid) {
+		update(node * 2, start, mid, idx, val);
+	} else {
+		update(node * 2 + 1, mid + 1, end, idx, val);
+	}
 	tree[node] = tree[node * 2] + tree[node * 2 + 1];
 }
