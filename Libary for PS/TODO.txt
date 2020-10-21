@@ -3,13 +3,13 @@ DIJKSTRA (DONE)
 FLOYAD (DONE)
 BELLMAN (DONE)
 SSC(tarjan, Kosaraju) (DONE)
-2-Sat
+2-Sat (Done)
 ##Strings
 Trie
 ##Searching
 Meet in the middle
 Binary search tricks
-Ternay Search
+Ternay Search (Done)
 
 Recap: 
 Expected Value and ( DP on expected value Mostafa saad channel)
