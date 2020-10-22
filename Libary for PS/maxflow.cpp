@@ -40,3 +40,24 @@ cout << flow << '\n';
 // 			addBiEdge(out[i], i); for node values
 // out[i] to in[j] // General formula
 // vetrix to edge trick
+
+for (int i = 1; i <= n + n + 2; ++i) {
+	out[i] = i + n;
+}
+// make the vertax as an edge
+addBiEdge(i, out[i]);
+cost[i][out[i]] += c;
+
+// normal edge going from u to v
+addBiEdge(out[u], v);
+cost[out[u]][v] += c;
+
+addBiEdge(u, start);
+cost[start][u] = OO;
+
+addBiEdge(out[u], end);
+cost[out[u]][end] = OO;
+
+// in case of biparite Matching problems // 1 --  3
+addBiEdge(u, out[v]);                    // 2 /
+
